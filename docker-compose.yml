@@ -1,0 +1,17 @@
+version: "3.6"
+
+services:
+  # Frontend App
+  frontend:
+    container_name: ${PROJECT_NAME}-frontend
+    image: node:lts-alpine3.18
+    env_file:
+      - ./.env
+    ports:
+      - "${HOST}:${FRONT_DEV_PORT}:${FRONT_DEV_PORT}"
+      - "${HOST}:${FRONT_PROD_PORT}:${FRONT_PROD_PORT}"
+    command: sh -c "tail -f /dev/null"
+    volumes:
+      - ./frontend:/var/www/html
+    restart: unless-stopped
+    working_dir: /var/www/html
