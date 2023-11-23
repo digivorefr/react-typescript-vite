@@ -72,5 +72,10 @@ export default defineConfig(({ mode }): UserConfig => {
       port: parseInt(env.FRONT_DEV_PORT, 10),
       https: false,
     },
+    preview: {
+      host: env.HOST,
+      port: parseInt(env.FRONT_PROD_PORT, 10),
+      https: false,
+    },
   };
 });

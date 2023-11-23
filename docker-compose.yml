@@ -15,3 +15,33 @@ services:
       - ./frontend:/var/www/html
     restart: unless-stopped
     working_dir: /var/www/html
+
+  # Backend API
+  backend:
+    container_name: ${PROJECT_NAME}-backend
+    image: node:lts-alpine3.18
+    env_file:
+      - ./.env
+    ports:
+      - "${HOST}:${BACK_PORT}:${BACK_PORT}"
+    command: sh -c "tail -f /dev/null"
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - dbnetwork
+    restart: unless-stopped
+    working_dir: /var/www/html
+
+  # Database
+  database:
+    container_name: ${PROJECT_NAME}-database
+    image: mongo:latest
+    env_file:
+      - ./.env
+    volumes:
+      - ./database/DB:/data/db
+    networks:
+      - dbnetwork
+networks:
+  dbnetwork:
+    driver: bridge

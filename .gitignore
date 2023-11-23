@@ -11,6 +11,9 @@ node_modules
 # production
 build
 
+# database
+DB/
+
 # misc
 .DS_Store
 .env
